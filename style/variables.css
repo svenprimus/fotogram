@@ -1,0 +1,15 @@
+:root {
+    --color-bg-main: #06171E;
+    --color-bg-shell: #09212A;
+    --color-font-main: #FFFFFF;
+    --color-font-foot: #969696;
+
+    --border-style-default: 2px solid #124658;
+    --border-style-hover:  2px solid #6BC1E1;
+
+    /* equal for mobile and desktop */
+    /* TODO: may be removed later, as possible only one place in code */
+    --size-img: 150px;
+    --size-btn-close: 32px;
+    --size-btn-arrow: 60px;
+}
