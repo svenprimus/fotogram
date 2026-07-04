@@ -8,6 +8,24 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+h1 {
+    font-family: "Figtree";
+    font-weight: 800;
+    line-height: 100%;
+    font-size: clamp(48px, calc((100dvw - 400px) * 8 / 1000 + 48px), 56px);
+    color: var(--color-font-main);
+    text-align: center;
+}
+
+p {
+    font-family: "Figtree";
+    font-weight: 400;
+    line-height: 100%;
+    font-size: 14px;
+    color: var(--color-font-foot);
+    text-align: center;
+}
 /* #endregion global-assignements */
 
 /* #region shell */
@@ -33,9 +51,12 @@ header {
     }
 }
 
-footer {
-    color: var(--color-font-foot);
+header,
+main {
+    padding: 0 clamp(30px, calc((100vw - 400px) * 105 / 840 + 30px), 135px);
+}
 
+footer {
     article {
         height: 100px;
 
@@ -73,9 +94,46 @@ footer {
 main {
     /* padding equal to header height to not overlap on hero view */
     padding-top: clamp(72px, calc((100dvw - 400px) * 8 / 1000 + 72px), 80px);
-
     height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     section {
-        height: 100%;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(56px, calc((100dvw - 400px) * 24 / 1000 + 56px), 80px);
+
+        div {
+            /* placeholder */
+            height: 250px;
+            width: 100%;
+            background-color: red;
+        }
     }
 }
+
+/* #region media queries */
+
+@media screen and (min-width: 769px) {
+    header {
+        justify-content: flex-start;
+
+        nav {
+            padding-left: 5px;
+        }
+    }
+}
+
+@media screen and (min-width: 1441px) {
+    header,
+    main {
+        padding: 0 max(calc(50% - 720px), 135px);
+    }
+}
+
+/* #endregion media queries */
