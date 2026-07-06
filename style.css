@@ -133,7 +133,7 @@ main {
 @media screen and (min-width: 1441px) {
     header,
     main {
-        padding: 0 max(calc(50% - 720px), 135px);
+        padding-inline: max(calc(50% - 720px), 135px);
     }
 }
 
