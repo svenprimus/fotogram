@@ -14,21 +14,24 @@
 
         <script src="./script.js" defer></script>
     </head>
-    <body>
+    <body onload="renderGallery()">
         <header>
             <nav>
-                <a role="navigation" href="#main-section"
+                <a role="navigation" href="#page-top"
                     ><img role="banner" src="./assets/icon/logo-fotogram-text.svg" alt="logo of fotogram website"
                 /></a>
             </nav>
         </header>
 
         <main>
-            <section id="main-section">
+            <section aria-hidden="true" id="page-top"></section>
+            <section>
                 <h1>Your personal photo album</h1>
-                <div></div>
+                <div role="main" class="gallery" id="gallery"></div>
             </section>
         </main>
+
+        <section aria-hidden="true" class="filler"></section>
 
         <footer>
             <article role="contentinfo">

@@ -9,6 +9,10 @@ body {
     flex-direction: column;
 }
 
+.filler {
+    height: 100%;
+}
+
 h1 {
     font-family: "Figtree";
     font-weight: 800;
@@ -53,7 +57,7 @@ header {
 
 header,
 main {
-    padding: 0 clamp(30px, calc((100vw - 400px) * 105 / 840 + 30px), 135px);
+    padding: 0 clamp(29.5px, calc((100vw - 400px) * 105.5 / 840 + 29.5px), 135px);
 }
 
 footer {
@@ -91,35 +95,61 @@ footer {
 }
 /* #endregion shell */
 
+/* as our header banner is fixed, we want our actual content to move down equal to the size of the header and have
+an anchor point to navigate to on the top of the page. Without such "empty" container we we would e.g. navigate to h1
+without padding being considered in the navigation. So h1 would be hidden behind banner. */
+#page-top {
+    width: 100%;
+    height: clamp(72px, calc((100dvw - 400px) * 8 / 1000 + 72px), 80px);
+    padding: 0 0;
+}
+
 main {
     /* padding equal to header height to not overlap on hero view */
-    padding-top: clamp(72px, calc((100dvw - 400px) * 8 / 1000 + 72px), 80px);
-    /* height: 100%; */
+    /* padding-top: clamp(72px, calc((100dvw - 400px) * 8 / 1000 + 72px), 80px); */
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     section {
         width: 100%;
-
+        top: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: clamp(56px, calc((100dvw - 400px) * 24 / 1000 + 56px), 80px);
-
-        div {
-            /* placeholder */
-            height:1500px;
-            width: 100%;
-            background-color: rgba(255, 0, 0, 0.548);
-        }
+        padding-block: clamp(45px, calc((100dvw - 400px) * 115 / 1000 + 45px), 160px);
     }
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: clamp(16px, calc((100dvw - 400px) * 32 / 1000 + 16px), 48px);
+    column-gap: 16px;
+}
+
+.picture {
+    width: var(--size-img);
+    height: var(--size-img);
+
+    object-fit: cover;
+    border-radius: 16px;
+    border: var(--border-style-default);
+
+    /* fallback background */
+    background-color: var(--color-bg-shell);
+    color: var(--color-font-main);
+}
+
+.picture:hover {
+    border: var(--border-style-hover);
 }
 
 /* #region media queries */
-
 @media screen and (min-width: 769px) {
     header {
         justify-content: flex-start;
@@ -131,10 +161,36 @@ main {
 }
 
 @media screen and (min-width: 1441px) {
-    header,
-    main {
+    header {
         padding-inline: max(calc(50% - 720px), 135px);
+    }
+    main {
+        padding-inline: max(calc(50% - (720px - 135px)), 135px);
     }
 }
 
+/* optional media queries */
+@media screen and (max-width: 319px) {
+    h1 {
+        font-size: clamp(16px, calc((100dvw - 100px) * 32 / 219 + 16px), 48px);
+    }
+    p {
+        font-size: clamp(8px, calc((100dvw - 100px) * 6 / 219 + 8px), 14px);
+    }
+    header {
+        img {
+            width: clamp(50px, calc(100dvw * 118 / 319 + 50px), 168px);
+        }
+    }
+    footer {
+        article {
+            img {
+                width: clamp(50px, calc(100dvw * 50 / 319 + 50px), 100px);
+            }
+        }
+    }
+    main {
+        padding-inline: clamp(4px, calc((100dvw - 100px) * 26 / 219 + 4px), 30px);
+    }
+}
 /* #endregion media queries */
