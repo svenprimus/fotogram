@@ -31,12 +31,19 @@ const dialogRef = document.getElementById("pictureDialog");
 
 function openDialog(galleryIndex) {
     // TODO cut file extension
-    // const label = fotoGallery[galleryIndex]
+    const label = fotoGallery[galleryIndex];
 
     dialogRef.innerHTML = /*html*/ `
-        <h2></h2>
-        <img class="dialogPicture" src=${pathgToGallery + fotoGallery[galleryIndex]} alt="${fotoGallery[galleryIndex]}"/>
-        <button onclick="closeDialog()">close</button>
+        <div class="dialog-content-wrapper">
+            <div class="modal-head-close">
+                <img onclick="closeDialog()" src="./assets/icon/icon-close-default.svg" alt="close-button"/>
+                <h2>${label}</h2>
+            </div>
+            
+
+            <img class="dialogPicture" src=${pathgToGallery + fotoGallery[galleryIndex]} alt="${fotoGallery[galleryIndex]}"/>
+            <div class="modal-nav"></div>
+        </div>
     `;
     dialogRef.showModal();
 }

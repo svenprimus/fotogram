@@ -149,6 +149,64 @@ main {
     border: var(--border-style-hover);
 }
 
+dialog {
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--color-bg-shell);
+    border: 0;
+
+    .dialogPicture {
+        max-width: 100%;
+        object-fit: cover;
+
+        /* padding top/bot 32 -> 64 + button height 60 + gap 2*48 */
+        /* -> 64 + 60 + 96 = 220*/
+        max-height: calc(100% - 220px);
+    }
+
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+}
+.modal-nav {
+    height: var(--size-btn-arrow);
+    width: 75%;
+
+    /* TODO test */
+    background-color: purple;
+}
+
+.dialog-content-wrapper {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 21.5px;
+    padding: clamp(32px, calc(100dvw - 400px) * 24 / 1000 + 32px, 56px)
+        clamp(21.5px, calc(100dvw - 400px) * 42.5 / 1000 + 21.5px, 64px);
+    gap: 48px;
+}
+
+.modal-head-close {
+    img {
+        background-size: cover;
+        height: var(--size-btn-close);
+        width: var(--size-btn-close);
+    }
+}
+
+dialog:modal {
+    max-width: 100dvw;
+    max-height: 100dvh;
+}
+
+dialog::backdrop {
+    background-color: var(--volor-bg-shell);
+    opacity: 0.8;
+}
+
 /* #region media queries */
 @media screen and (min-width: 769px) {
     header {
