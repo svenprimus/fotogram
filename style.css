@@ -22,6 +22,18 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-family: "Figtree";
+    font-weight: 700;
+    line-height: 100%;
+    font-size: 24px;
+    color: var(--color-font-main);
+    text-wrap: nowrap;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 p {
     font-family: "Figtree";
     font-weight: 400;
@@ -29,6 +41,14 @@ p {
     font-size: 14px;
     color: var(--color-font-foot);
     text-align: center;
+}
+
+button {
+    background-color: #00000000;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    text-decoration: none;
 }
 /* #endregion global-assignements */
 
@@ -61,7 +81,7 @@ main {
 }
 
 footer {
-    article {
+    div {
         height: 100px;
 
         position: relative;
@@ -105,9 +125,6 @@ without padding being considered in the navigation. So h1 would be hidden behind
 }
 
 main {
-    /* padding equal to header height to not overlap on hero view */
-    /* padding-top: clamp(72px, calc((100dvw - 400px) * 8 / 1000 + 72px), 80px); */
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,7 +132,6 @@ main {
 
     section {
         width: 100%;
-        top: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -124,6 +140,7 @@ main {
         padding-block: clamp(45px, calc((100dvw - 400px) * 115 / 1000 + 45px), 160px);
     }
 }
+
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -149,33 +166,7 @@ main {
     border: var(--border-style-hover);
 }
 
-dialog {
-    width: 100dvw;
-    height: 100dvh;
-    background-color: var(--color-bg-shell);
-    border: 0;
-
-    .dialogPicture {
-        max-width: 100%;
-        object-fit: cover;
-
-        /* padding top/bot 32 -> 64 + button height 60 + gap 2*48 */
-        /* -> 64 + 60 + 96 = 220*/
-        max-height: calc(100% - 220px);
-    }
-
-    /* display: flex; */
-    flex-direction: column;
-    align-items: center;
-}
-.modal-nav {
-    height: var(--size-btn-arrow);
-    width: 75%;
-
-    /* TODO test */
-    background-color: purple;
-}
-
+/* #region dialog */
 .dialog-content-wrapper {
     height: 100dvh;
     display: flex;
@@ -187,25 +178,122 @@ dialog {
     padding: clamp(32px, calc(100dvw - 400px) * 24 / 1000 + 32px, 56px)
         clamp(21.5px, calc(100dvw - 400px) * 42.5 / 1000 + 21.5px, 64px);
     gap: 48px;
-}
 
-.modal-head-close {
-    img {
-        background-size: cover;
-        height: var(--size-btn-close);
-        width: var(--size-btn-close);
+    .modal-head-close {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-inline: clamp(31px, calc((100dvw - 400px) * 33 / 1000 + 31px), 64px);
+
+        .close-button {
+            align-self: flex-end;
+            background-image: url(./assets/icon/icon-close.svg);
+            background-size: cover;
+            height: var(--size-btn-close);
+            width: var(--size-btn-close);
+        }
+
+        .close-button:hover {
+            background-color: var(--color-btn-hover);
+        }
+
+        .close-button:active {
+            background-color: var(--color-btn-click);
+        }
+
+        h2:hover {
+            overflow: inherit;
+            text-wrap: wrap;
+        }
+    }
+
+    .modal-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 260px;
+
+        .arrow-button-left,
+        .arrow-button-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: var(--size-btn-arrow);
+            width: var(--size-btn-arrow);
+
+            background-color: var(--color-btn-arrow-default);
+
+            div {
+                background-image: url(./assets/icon/icon-arrow-right.svg);
+                background-size: cover;
+                height: var(--size-arrow);
+                width: var(--size-arrow);
+            }
+        }
+
+        .arrow-button-left {
+            transform: rotate(180deg);
+        }
+
+        .arrow-button-left:hover,
+        .arrow-button-right:hover {
+            background-color: var(--color-btn-arrow-hover);
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--color-font-dialog);
+        }
     }
 }
 
-dialog:modal {
-    max-width: 100dvw;
+dialog {
+    width: 100dvw;
+    height: 100dvh;
+
+    /* override margin to place in center */
     max-height: 100dvh;
+    max-width: 100dvw;
+    margin: auto;
+
+    background-color: var(--color-bg-shell);
+    background-color: #09212a;
+    border: 0;
+
+    .dialog-picture-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 100%;
+
+        /* padding top/bot 32 -> 64 + button height 60 + gap 2*48 */
+        /* -> 64 + 60 + 96 = 220*/
+        height: calc(100% - 220px);
+    }
+
+    .dialog-picture {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+    flex-direction: column;
+    align-items: center;
 }
 
-dialog::backdrop {
-    background-color: var(--volor-bg-shell);
-    opacity: 0.8;
+dialog.opened::backdrop {
+    background-color: var(--color-bg-main);
+    opacity: 0.75;
+    transition: all 1s ease-in-out;
 }
+
+/* hide scrollbar when dialog is open */
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+/* #endregion dialog */
 
 /* #region media queries */
 @media screen and (min-width: 769px) {
@@ -215,6 +303,28 @@ dialog::backdrop {
         nav {
             padding-left: 5px;
         }
+    }
+
+    .dialog-content-wrapper {
+        .modal-head-close {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .close-button {
+                order: 1;
+            }
+        }
+    }
+
+    .dialog-content-wrapper {
+        max-height: min(var(--height-max-dialog-desktop), var(--height-max-dialog-limit));
+    }
+
+    dialog {
+        border-radius: 40px;
+        max-height: min(var(--height-max-dialog-desktop), var(--height-max-dialog-limit));
+        max-width: min(var(--width-max-dialog-desktop), var(--width-max-dialog-limit));
     }
 }
 
@@ -241,7 +351,7 @@ dialog::backdrop {
         }
     }
     footer {
-        article {
+        div {
             img {
                 width: clamp(50px, calc(100dvw * 50 / 319 + 50px), 100px);
             }
@@ -249,6 +359,16 @@ dialog::backdrop {
     }
     main {
         padding-inline: clamp(4px, calc((100dvw - 100px) * 26 / 219 + 4px), 30px);
+    }
+
+    .dialog-content-wrapper {
+        .modal-head-close {
+            padding-inline: clamp(5px, calc((100dvw - 200px) * 26 / 119 + 5px), 31px);
+        }
+
+        .modal-nav {
+            width: clamp(150px, calc((100dvw - 160px) * 110 / 159 + 150px), 260px);
+        }
     }
 }
 /* #endregion media queries */

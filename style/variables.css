@@ -1,16 +1,30 @@
 :root {
-    --color-bg-main: #06171E;
-    --color-bg-shell: #09212A;
-    --color-font-main: #FFFFFF;
+    --color-bg-main: #06171e;
+    --color-bg-shell: #09212a;
+
+    --color-font-main: #ffffff;
     --color-font-foot: #969696;
-    --color-font-dialog: #F5F5F5;
+    --color-font-dialog: #f5f5f5;
+
+    --color-btn-hover: #124658;
+    --color-btn-click: #0d3240;
+    --color-btn-arrow-default: rgb(253, 91, 79, 0.1);
+    --color-btn-arrow-hover: rgb(253, 91, 79, 0.2);
 
     --border-style-default: 2px solid #124658;
-    --border-style-hover:  2px solid #6BC1E1;
+    --border-style-hover: 2px solid #6bc1e1;
 
     /* equal for mobile and desktop */
-    /* TODO: may be removed later, as possible only one place in code */
     --size-img: 150px;
     --size-btn-close: 32px;
     --size-btn-arrow: 60px;
+    --size-arrow: 24px;
+
+    /* dynamic dialog size looks way better than hard figma suggestion */
+    /* --width-max-dialog-desktop: 768px; */
+    /* --height-max-dialog-desktop: 675px;  */
+    --width-max-dialog-desktop: 75dvw;
+    --height-max-dialog-desktop: 75dvh;
+    --width-max-dialog-limit: 1440px;
+    --height-max-dialog-limit: 900px;
 }
