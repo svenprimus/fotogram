@@ -59,6 +59,7 @@ function setPageFocusOnTop() {
 }
 
 function setDialogFocusOnTop() {
+    // TODO: how to trigger?
     const dialogCloseRef = document.getElementById("dialogClose");
     dialogCloseRef.focus();
 }
@@ -71,4 +72,9 @@ function setDialogFocusOnNext() {
 function setDialogFocusOnPrevious() {
     const dialogNextRef = document.getElementById("dialogPrevious");
     dialogNextRef.focus();
+}
+
+// make dialog clickable without closing it
+function stopDialogPropagation(event) {
+    event.stopPropagation();
 }

@@ -20,7 +20,7 @@ const fotoGallery = [
 
 function getDialogContent(index) {
     return /*html*/ `
-        <section class="dialog-content-wrapper" onclick="stopPropagation(event)">
+        <section class="dialog-content-wrapper" onclick="stopDialogPropagation(event)">
             ${getModalHeadWrapper(index)}
             ${getModalPictureWrapper(index)}
             ${getModalNavigationWrapper(index)}
@@ -89,8 +89,4 @@ function getModalNavigationContent(index) {
             <div></div>
         </button>
     `;
-}
-
-function stopPropagation(event) {
-    event.stopPropagation();
 }

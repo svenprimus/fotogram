@@ -299,6 +299,12 @@ dialog {
 
 dialog.opened::backdrop {
     background-color: var(--color-bg-main);
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+
+dialog.opened::backdrop {
+    background-color: var(--color-bg-main);
     opacity: 0.75;
     transition: all 1s ease-in-out;
 }
