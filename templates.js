@@ -18,29 +18,21 @@ const fotoGallery = [
     { file: "sailing.jpg", alt: "Adult controlling huge sailing ship" },
 ];
 
-function getGalleryPicture(index) {
-    return /*html*/ `
-            <img class="picture" onclick="openDialog(${index})" src=${pathgToGallery + fotoGallery[index].file} 
-                alt="${fotoGallery[index].alt}"
-            />
-        `;
-}
-
 function getDialogContent(index) {
     return /*html*/ `
-        <div class="dialog-content-wrapper">
+        <section class="dialog-content-wrapper" onclick="stopPropagation(event)">
             ${getModalHeadWrapper(index)}
             ${getModalPictureWrapper(index)}
             ${getModalNavigationWrapper(index)}
-        </div>
+        </section>
     `;
 }
 
 function getModalHeadWrapper(index) {
     return /*html*/ `
-        <div id="modalHead" class="modal-head-close">
+        <header id="modalHead" class="modal-head-close">
             ${getModalHeadContent(index)}
-        </div>
+        </header>
     `;
 }
 
@@ -50,16 +42,26 @@ function getModalHeadContent(index) {
     const label = fotoGallery[index].file.replace(/\.[^/.]+$/, "").replace("_", " ");
 
     return /*html*/ `
-        <button class="close-button" onclick="closeDialog()"></button>
+        <button id="dialogClose" class="close-button" onclick="closeDialog()" tabindex="-1"></button>
         <h2>${label}</h2>
     `;
 }
 
+function getGalleryPicture(index) {
+    return /*html*/ `
+        <button class="picture-button" onclick="openDialog(${index})" tabindex="0" >
+            <img class="picture" src=${pathgToGallery + fotoGallery[index].file} 
+                alt="${fotoGallery[index].alt}" 
+            />
+        </button>
+        `;
+}
+
 function getModalPictureWrapper(index) {
     return /*html*/ `
-        <div id="dialogPicture" class="dialog-picture-wrapper">
+        <section id="dialogPicture" class="dialog-picture-wrapper">
             ${getModalPicture(index)}
-        </div>
+        </section>
     `;
 }
 
@@ -71,20 +73,24 @@ function getModalPicture(index) {
 
 function getModalNavigationWrapper(index) {
     return /*html*/ `
-        <div id="modalNav" class="modal-nav">
+        <nav id="modalNav" class="modal-nav">
             ${getModalNavigationContent(index)}
-        </div>      
+        </nav>      
     `;
 }
 
 function getModalNavigationContent(index) {
     return /*html*/ `
-        <button class="arrow-button-left" onclick="renderPreviousImage(${index})">
+        <button id="dialogPrevious"class="arrow-button-left" onclick="renderPreviousImage(${index})" tabindex="0">
             <div></div>
         </button>
         <p>${index + 1} / ${fotoGallery.length}</p>
-        <button class="arrow-button-right" onclick="renderNextImage(${index})">
+        <button id="dialogNext" class="arrow-button-right" onclick="renderNextImage(${index})" tabindex="0">
             <div></div>
         </button>
     `;
+}
+
+function stopPropagation(event) {
+    event.stopPropagation();
 }

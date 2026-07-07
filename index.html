@@ -16,9 +16,9 @@
         <script src="./script.js" defer></script>
     </head>
     <body onload="renderGallery()">
-        <header>
+        <header class="header-main">
             <nav>
-                <a role="navigation" href="#page-top"
+                <a id="home" role="navigation" href="#page-top" tabindex="-1"
                     ><img role="banner" src="./assets/icon/logo-fotogram-text.svg" alt="logo of fotogram website"
                 /></a>
             </nav>
@@ -30,7 +30,7 @@
                 <h1>Your personal photo album</h1>
                 <div role="main" class="gallery" id="gallery"></div>
             </section>
-            <dialog id="pictureDialog"></dialog>
+            <dialog id="pictureDialog" onclick="closeDialog()"></dialog>
         </main>
 
         <section aria-hidden="true" class="filler"></section>

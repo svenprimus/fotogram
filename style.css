@@ -44,16 +44,17 @@ p {
 }
 
 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #00000000;
-    border-radius: 100%;
     border: none;
-    outline: none;
     text-decoration: none;
 }
 /* #endregion global-assignements */
 
 /* #region shell */
-header,
+.header-main,
 .footer-circle {
     width: 100%;
     background-color: var(--color-bg-shell);
@@ -63,7 +64,7 @@ header,
     justify-content: center;
 }
 
-header {
+.header-main {
     z-index: 1;
 
     height: clamp(72px, calc((100dvw - 400px) * 8 / 1000 + 72px), 80px);
@@ -75,7 +76,7 @@ header {
     }
 }
 
-header,
+.header-main,
 main {
     padding: 0 clamp(29.5px, calc((100vw - 400px) * 105.5 / 840 + 29.5px), 135px);
 }
@@ -130,7 +131,7 @@ main {
     justify-content: center;
     align-items: center;
 
-    section {
+    > section {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -149,21 +150,26 @@ main {
     column-gap: 16px;
 }
 
+.picture-button {
+    border-radius: 16px;
+    outline: 2px solid transparent;
+}
+
+.picture-button:focus,
+.picture-button:hover {
+    outline: var(--border-style-hover);
+}
+
 .picture {
     width: var(--size-img);
     height: var(--size-img);
 
     object-fit: cover;
     border-radius: 16px;
-    border: var(--border-style-default);
 
     /* fallback background */
     background-color: var(--color-bg-shell);
     color: var(--color-font-main);
-}
-
-.picture:hover {
-    border: var(--border-style-hover);
 }
 
 /* #region dialog */
@@ -193,7 +199,8 @@ main {
             width: var(--size-btn-close);
         }
 
-        .close-button:hover {
+        .close-button:hover,
+        .close-button:focus {
             background-color: var(--color-btn-hover);
         }
 
@@ -237,7 +244,9 @@ main {
         }
 
         .arrow-button-left:hover,
-        .arrow-button-right:hover {
+        .arrow-button-right:hover,
+        .arrow-button-left:focus,
+        .arrow-button-right:focus {
             background-color: var(--color-btn-arrow-hover);
         }
 
@@ -281,6 +290,11 @@ dialog {
 
     flex-direction: column;
     align-items: center;
+
+    button {
+        border-radius: 100%;
+        outline: none;
+    }
 }
 
 dialog.opened::backdrop {
@@ -297,7 +311,7 @@ body:has(dialog[open]) {
 
 /* #region media queries */
 @media screen and (min-width: 769px) {
-    header {
+    .header-main {
         justify-content: flex-start;
 
         nav {
@@ -306,6 +320,8 @@ body:has(dialog[open]) {
     }
 
     .dialog-content-wrapper {
+        max-height: min(var(--height-max-dialog-desktop), var(--height-max-dialog-limit));
+
         .modal-head-close {
             flex-direction: row;
             justify-content: space-between;
@@ -317,10 +333,6 @@ body:has(dialog[open]) {
         }
     }
 
-    .dialog-content-wrapper {
-        max-height: min(var(--height-max-dialog-desktop), var(--height-max-dialog-limit));
-    }
-
     dialog {
         border-radius: 40px;
         max-height: min(var(--height-max-dialog-desktop), var(--height-max-dialog-limit));
@@ -329,7 +341,7 @@ body:has(dialog[open]) {
 }
 
 @media screen and (min-width: 1441px) {
-    header {
+    .header-main {
         padding-inline: max(calc(50% - 720px), 135px);
     }
     main {
@@ -345,7 +357,7 @@ body:has(dialog[open]) {
     p {
         font-size: clamp(8px, calc((100dvw - 100px) * 6 / 219 + 8px), 14px);
     }
-    header {
+    .header-main {
         img {
             width: clamp(50px, calc(100dvw * 118 / 319 + 50px), 168px);
         }
