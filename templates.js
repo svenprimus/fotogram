@@ -20,7 +20,8 @@ const fotoGallery = [
 
 function getDialogContent(index) {
     return /*html*/ `
-        <section class="dialog-content-wrapper" onclick="stopDialogPropagation(event)">
+        <section aria-description="dialog window for bigger view of image" class="dialog-content-wrapper" 
+            onclick="stopDialogPropagation(event)">
             ${getModalHeadWrapper(index)}
             ${getModalPictureWrapper(index)}
             ${getModalNavigationWrapper(index)}
@@ -42,14 +43,17 @@ function getModalHeadContent(index) {
     const label = fotoGallery[index].file.replace(/\.[^/.]+$/, "").replace("_", " ");
 
     return /*html*/ `
-        <button id="dialogClose" class="close-button" onclick="closeDialog()" tabindex="-1"></button>
+        <button aria-controls="pictureDialog" aria-details="close dialog" id="dialogClose" class="close-button"
+            onclick="closeDialog()" tabindex="-1">
+        </button>
         <h2>${label}</h2>
     `;
 }
 
 function getGalleryPicture(index) {
     return /*html*/ `
-        <button class="picture-button" onclick="openDialog(${index})" tabindex="0" >
+        <button aria-description="thumbnail to open big view of image" class="picture-button" 
+            onclick="openDialog(${index})" tabindex="0" >
             <img class="picture" src=${pathgToGallery + fotoGallery[index].file} 
                 alt="${fotoGallery[index].alt}" 
             />
@@ -81,12 +85,14 @@ function getModalNavigationWrapper(index) {
 
 function getModalNavigationContent(index) {
     return /*html*/ `
-        <button id="dialogPrevious"class="arrow-button-left" onclick="renderPreviousImage(${index})" tabindex="0">
-            <div></div>
+        <button aria-controls="dialogPicture" aria-details="arrow left" id="dialogPrevious" class="arrow-button-left" 
+            onclick="renderPreviousImage(${index})" tabindex="0">
+            <div aria-hidden="true"></div>
         </button>
-        <p>${index + 1} / ${fotoGallery.length}</p>
-        <button id="dialogNext" class="arrow-button-right" onclick="renderNextImage(${index})" tabindex="0">
-            <div></div>
+        <p aria-details="current image index">${index + 1} / ${fotoGallery.length}</p>
+        <button aria-controls="dialogPicture" aria-details="arrow right" id="dialogNext" class="arrow-button-right" 
+            onclick="renderNextImage(${index})" tabindex="0">
+            <div aria-hidden="true"></div>
         </button>
     `;
 }
