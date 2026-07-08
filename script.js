@@ -53,12 +53,6 @@ function renderModalImageAndNav(currentImageIndex) {
     modalNavRef.innerHTML = getModalNavigationContent(currentImageIndex);
 }
 
-function setPageFocusOnTop() {
-    // TODO: how to trigger?
-    const homeRef = document.getElementById("home");
-    homeRef.focus();
-}
-
 function setDialogFocusOnTop() {
     const dialogCloseRef = document.getElementById("dialogClose");
     dialogCloseRef.focus();
