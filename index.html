@@ -18,8 +18,8 @@
     <body onload="renderGallery()">
         <header class="header-main">
             <nav>
-                <a id="home" role="navigation" href="#page-top" tabindex="-1"
-                    ><img role="banner" src="./asset/icon/logo-fotogram-text.svg" alt="logo of fotogram website"
+                <a id="home" aria-label="go to top of page" href="#page-top"
+                    ><img src="./asset/icon/logo-fotogram-text.svg" alt="logo of fotogram website"
                 /></a>
             </nav>
         </header>
@@ -28,7 +28,7 @@
             <section aria-hidden="true" id="page-top"></section>
             <section>
                 <h1>Special moments of my life</h1>
-                <div role="main" class="gallery" id="gallery"></div>
+                <div class="gallery" id="gallery"></div>
             </section>
             <dialog id="pictureDialog" onclick="closeDialog()" aria-labelledby="dialogTitle"></dialog>
         </main>
@@ -36,7 +36,7 @@
         <section aria-hidden="true" class="filler"></section>
 
         <footer>
-            <div role="contentinfo">
+            <div>
                 <img src="./asset/icon/logo-da-text.svg" alt="logo of developer akademie" />
                 <p>© 2023 Developer Akademie GmbH</p>
                 <div class="footer-circle"></div>
