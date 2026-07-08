@@ -50,6 +50,7 @@ button {
     background-color: #00000000;
     border: none;
     text-decoration: none;
+    cursor: pointer;
 }
 /* #endregion global-assignements */
 

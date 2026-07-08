@@ -1,17 +1,17 @@
 function renderGallery() {
     const galleryRef = document.getElementById("gallery");
     galleryRef.innerHTML = "";
-    for (let i = 0; i < fotoGallery.length; i++) {
+    for (let i = 0; i < pictureGallery.length; i++) {
         galleryRef.innerHTML += getGalleryPicture(i);
     }
 }
 
 function openDialog(galleryIndex) {
+    const label = getTrimmedLabel(galleryIndex);
     const dialogRef = document.getElementById("pictureDialog");
-    dialogRef.innerHTML = getDialogContent(galleryIndex);
+    dialogRef.innerHTML = getDialogContent(galleryIndex, label);
     dialogRef.showModal();
     setDialogFocusOnTop();
-    // add slight backdrop animation
     dialogRef.classList.add("opened");
 }
 
@@ -21,37 +21,36 @@ function closeDialog(galleryIndex) {
     dialogRef.close();
 }
 
+// render previous image and keep focus on next-button
 function renderNextImage(currentImageIndex) {
-    const next = (currentImageIndex + 1) % fotoGallery.length;
+    const next = (currentImageIndex + 1) % pictureGallery.length;
     renderModalContent(next);
-    // keep focus on this button
     setDialogFocusOnNext();
 }
 
+// render previous image and keep focus on previous-button
 function renderPreviousImage(currentImageIndex) {
-    // carefull with underflow: add length before modulo operation
-    const previous = (currentImageIndex - 1 + fotoGallery.length) % fotoGallery.length;
+    const previous = (currentImageIndex - 1 + pictureGallery.length) % pictureGallery.length;
     renderModalContent(previous);
-    // keep focus on this button
     setDialogFocusOnPrevious();
 }
 
 // render content of dialog from existing content
 function renderModalContent(currentImageIndex) {
-    // we COULD also instead closeDialog() and openDialog() with updated index,
-    // BUT I believe that would interfere with animations etc later. So Instead update content details.
-
-    // update picture
+    const label = getTrimmedLabel(currentImageIndex);
     const modalHeadRef = document.getElementById("modalHead");
-    modalHeadRef.innerHTML = getModalHeadContent(currentImageIndex);
+    modalHeadRef.innerHTML = getModalHeadContent(label);
 
-    // update picture
     const dialogPictureRef = document.getElementById("dialogPicture");
     dialogPictureRef.innerHTML = getModalPictureContent(currentImageIndex);
 
-    // update button indices as well
     const modalNavRef = document.getElementById("modalNav");
     modalNavRef.innerHTML = getModalNavigationContent(currentImageIndex);
+}
+
+// remove file-ending and underscores
+function getTrimmedLabel(galleryIndex) {
+    return pictureGallery[galleryIndex].file.replace(/\.[^/.]+$/, "").replace("_", " ");
 }
 
 function setDialogFocusOnTop() {
