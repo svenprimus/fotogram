@@ -54,12 +54,12 @@ function renderModalImageAndNav(currentImageIndex) {
 }
 
 function setPageFocusOnTop() {
+    // TODO: how to trigger?
     const homeRef = document.getElementById("home");
     homeRef.focus();
 }
 
 function setDialogFocusOnTop() {
-    // TODO: how to trigger?
     const dialogCloseRef = document.getElementById("dialogClose");
     dialogCloseRef.focus();
 }

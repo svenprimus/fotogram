@@ -116,6 +116,7 @@ footer {
 }
 /* #endregion shell */
 
+/* #region main */
 /* as our header banner is fixed, we want our actual content to move down equal to the size of the header and have
 an anchor point to navigate to on the top of the page. Without such "empty" container we we would e.g. navigate to h1
 without padding being considered in the navigation. So h1 would be hidden behind banner. */
@@ -171,6 +172,8 @@ main {
     background-color: var(--color-bg-shell);
     color: var(--color-font-main);
 }
+/* #endregion main */
+
 
 /* #region dialog */
 .dialog-content-wrapper {
@@ -297,11 +300,12 @@ dialog {
     }
 }
 
-dialog.opened::backdrop {
+/* this transition will not work as described by K. as backdrop does not exist anymore uppon closing dialog */
+/* dialog::backdrop {
     background-color: var(--color-bg-main);
     opacity: 0;
     transition: all 1s ease-in-out;
-}
+} */
 
 dialog.opened::backdrop {
     background-color: var(--color-bg-main);

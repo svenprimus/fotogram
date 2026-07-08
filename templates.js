@@ -43,17 +43,19 @@ function getModalHeadContent(index) {
     const label = fotoGallery[index].file.replace(/\.[^/.]+$/, "").replace("_", " ");
 
     return /*html*/ `
-        <button aria-controls="pictureDialog" aria-details="close dialog" id="dialogClose" class="close-button"
+        <button id="dialogClose" class="close-button" 
+            aria-controls="pictureDialog" aria-label="close dialog" 
             onclick="closeDialog()" tabindex="-1">
         </button>
-        <h2>${label}</h2>
+        <h2 id="dialogTitle">${label}</h2>
     `;
 }
 
 function getGalleryPicture(index) {
     return /*html*/ `
-        <button aria-description="thumbnail to open big view of image" class="picture-button" 
-            onclick="openDialog(${index})" tabindex="0" >
+        <button class="picture-button" tabindex="0" 
+            aria-haspopup="dialog" aria-controls="pictureDialog" 
+            onclick="openDialog(${index})" >
             <img class="picture" src=${pathgToGallery + fotoGallery[index].file} 
                 alt="${fotoGallery[index].alt}" 
             />
@@ -85,13 +87,15 @@ function getModalNavigationWrapper(index) {
 
 function getModalNavigationContent(index) {
     return /*html*/ `
-        <button aria-controls="dialogPicture" aria-details="arrow left" id="dialogPrevious" class="arrow-button-left" 
-            onclick="renderPreviousImage(${index})" tabindex="0">
+        <button id="dialogPrevious" class="arrow-button-left" tabindex="0"
+            aria-controls="dialogPicture" aria-label="previous picture" aria-describedby="current image index"
+            onclick="renderPreviousImage(${index})">
             <div aria-hidden="true"></div>
         </button>
-        <p aria-details="current image index">${index + 1} / ${fotoGallery.length}</p>
-        <button aria-controls="dialogPicture" aria-details="arrow right" id="dialogNext" class="arrow-button-right" 
-            onclick="renderNextImage(${index})" tabindex="0">
+        <p aria-label="current image index">${index + 1} / ${fotoGallery.length}</p>
+        <button id="dialogNext" class="arrow-button-right" tabindex="0"
+            aria-controls="dialogPicture" aria-label="next picture" aria-describedby="current image index"
+            onclick="renderNextImage(${index})">
             <div aria-hidden="true"></div>
         </button>
     `;
