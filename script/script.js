@@ -4,7 +4,6 @@ function renderGallery() {
     for (let i = 0; i < fotoGallery.length; i++) {
         galleryRef.innerHTML += getGalleryPicture(i);
     }
-    setPageFocusOnTop();
 }
 
 function openDialog(galleryIndex) {
