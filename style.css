@@ -196,7 +196,7 @@ main {
 
         .close-button {
             align-self: flex-end;
-            background-image: url(./assets/icon/icon-close.svg);
+            background-image: url(./asset/icon/icon-close.svg);
             background-size: cover;
             height: var(--size-btn-close);
             width: var(--size-btn-close);
@@ -235,7 +235,7 @@ main {
             background-color: var(--color-btn-arrow-default);
 
             div {
-                background-image: url(./assets/icon/icon-arrow-right.svg);
+                background-image: url(./asset/icon/icon-arrow-right.svg);
                 background-size: cover;
                 height: var(--size-arrow);
                 width: var(--size-arrow);

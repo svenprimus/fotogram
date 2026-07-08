@@ -1,4 +1,4 @@
-const pathgToGallery = "./assets/img/gallery/";
+const pathgToGallery = "./asset/img/gallery/";
 const fotoGallery = [
     { file: "bochum.jpg", alt: "Couple in front of VfL Bochum Stadium" },
     { file: "child_vacation.jpg", alt: "Child working with coal during its holidays" },
@@ -18,7 +18,21 @@ const fotoGallery = [
     { file: "sailing.jpg", alt: "Adult controlling huge sailing ship" },
 ];
 
+function getGalleryPicture(index) {
+    return /*html*/ `
+        <button class="picture-button" tabindex="0" 
+            aria-haspopup="dialog" aria-controls="pictureDialog" 
+            onclick="openDialog(${index})" >
+            <img class="picture" src=${pathgToGallery + fotoGallery[index].file} 
+                alt="${fotoGallery[index].alt}" 
+            />
+        </button>
+        `;
+}
+
 function getDialogContent(index) {
+    // if we want, we could move the induvidual wrapping divs into HTML and spare some templates, 
+    // but the way it is, it is cleaner and more flexible
     return /*html*/ `
         <section aria-description="dialog window for bigger view of image" class="dialog-content-wrapper" 
             onclick="stopDialogPropagation(event)">
@@ -51,27 +65,15 @@ function getModalHeadContent(index) {
     `;
 }
 
-function getGalleryPicture(index) {
-    return /*html*/ `
-        <button class="picture-button" tabindex="0" 
-            aria-haspopup="dialog" aria-controls="pictureDialog" 
-            onclick="openDialog(${index})" >
-            <img class="picture" src=${pathgToGallery + fotoGallery[index].file} 
-                alt="${fotoGallery[index].alt}" 
-            />
-        </button>
-        `;
-}
-
 function getModalPictureWrapper(index) {
     return /*html*/ `
         <section id="dialogPicture" class="dialog-picture-wrapper">
-            ${getModalPicture(index)}
+            ${getModalPictureContent(index)}
         </section>
     `;
 }
 
-function getModalPicture(index) {
+function getModalPictureContent(index) {
     return /*html*/ `
         <img class="dialog-picture" src=${pathgToGallery + fotoGallery[index].file} alt="${fotoGallery[index].alt}"/>
     `;

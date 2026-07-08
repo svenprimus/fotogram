@@ -6,23 +6,25 @@ function renderGallery() {
     }
     setPageFocusOnTop();
 }
-const dialogRef = document.getElementById("pictureDialog");
 
 function openDialog(galleryIndex) {
+    const dialogRef = document.getElementById("pictureDialog");
     dialogRef.innerHTML = getDialogContent(galleryIndex);
     dialogRef.showModal();
     setDialogFocusOnTop();
+    // add slight backdrop animation
     dialogRef.classList.add("opened");
 }
 
 function closeDialog(galleryIndex) {
+    const dialogRef = document.getElementById("pictureDialog");
     dialogRef.classList.remove("opened");
     dialogRef.close();
 }
 
 function renderNextImage(currentImageIndex) {
     const next = (currentImageIndex + 1) % fotoGallery.length;
-    renderModalImageAndNav(next);
+    renderModalContent(next);
     // keep focus on this button
     setDialogFocusOnNext();
 }
@@ -30,13 +32,13 @@ function renderNextImage(currentImageIndex) {
 function renderPreviousImage(currentImageIndex) {
     // carefull with underflow: add length before modulo operation
     const previous = (currentImageIndex - 1 + fotoGallery.length) % fotoGallery.length;
-    renderModalImageAndNav(previous);
+    renderModalContent(previous);
     // keep focus on this button
     setDialogFocusOnPrevious();
 }
 
 // render content of dialog from existing content
-function renderModalImageAndNav(currentImageIndex) {
+function renderModalContent(currentImageIndex) {
     // we COULD also instead closeDialog() and openDialog() with updated index,
     // BUT I believe that would interfere with animations etc later. So Instead update content details.
 
@@ -46,7 +48,7 @@ function renderModalImageAndNav(currentImageIndex) {
 
     // update picture
     const dialogPictureRef = document.getElementById("dialogPicture");
-    dialogPictureRef.innerHTML = getModalPicture(currentImageIndex);
+    dialogPictureRef.innerHTML = getModalPictureContent(currentImageIndex);
 
     // update button indices as well
     const modalNavRef = document.getElementById("modalNav");
@@ -64,8 +66,8 @@ function setDialogFocusOnNext() {
 }
 
 function setDialogFocusOnPrevious() {
-    const dialogNextRef = document.getElementById("dialogPrevious");
-    dialogNextRef.focus();
+    const dialogPreviousRef = document.getElementById("dialogPrevious");
+    dialogPreviousRef.focus();
 }
 
 // make dialog clickable without closing it
