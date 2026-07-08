@@ -71,8 +71,8 @@ button {
     position: fixed;
 
     img {
-        width: 168px;
-        height: 32px;
+        width: clamp(168px, calc((100dvw - 400px) * 48 / 1000 + 168px), 216px);
+        height: clamp(32px, calc((100dvw - 400px) * 9 / 1000 + 32px),41px)
     }
 }
 
